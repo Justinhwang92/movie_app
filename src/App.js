@@ -1,21 +1,55 @@
 import React from "react";
 
-// what {fav} means?
-// inside of props, I am going to use the "fav" object
-
-function Food({ fav }) {
-  //console.log(props);            //see what properties are in props
-  return <h1>I like {fav}</h1>;
+function Food({ name, picture }) {
+  return (
+    <div>
+      <h2>I like {name}</h2>
+      <img src={picture}></img>
+    </div>
+  );
 }
+
+const foodILike = [
+  {
+    name: "Kimchi",
+    image:
+      "http://aeriskitchen.com/wp-content/uploads/2008/09/kimchi_bokkeumbap_02-.jpg",
+  },
+  {
+    name: "Samgyeopsal",
+    image:
+      "https://3.bp.blogspot.com/-hKwIBxIVcQw/WfsewX3fhJI/AAAAAAAAALk/yHxnxFXcfx4ZKSfHS_RQNKjw3bAC03AnACLcBGAs/s400/DSC07624.jpg",
+  },
+  {
+    name: "Bibimbap",
+    image:
+      "http://cdn-image.myrecipes.com/sites/default/files/styles/4_3_horizontal_-_1200x900/public/image/recipes/ck/12/03/bibimbop-ck-x.jpg?itok=RoXlp6Xb",
+  },
+  {
+    name: "Doncasu",
+    image:
+      "https://s3-media3.fl.yelpcdn.com/bphoto/7F9eTTQ_yxaWIRytAu5feA/ls.jpg",
+  },
+  {
+    name: "Kimbap",
+    image:
+      "http://cdn2.koreanbapsang.com/wp-content/uploads/2012/05/DSC_1238r-e1454170512295.jpg",
+  },
+];
+
+// map is the javaScript function that takes an array
+// and excute a function in each item of the array
+// and it gives you an arrya with the result of that function
 
 function App() {
   return (
     <div>
-      <h1>Hlello world!</h1>
-      <Food fav="kimchi" />
-      <Food fav="ramen" />
-      <Food fav="gogi" />
-      <Food fav="pho" />
+      {/* takes each item(dish) then return 
+      the name and the imamge
+      dish is the object that currently being processed */}
+      {foodILike.map((dish) => (
+        <Food name={dish.name} picture={dish.image} />
+      ))}
     </div>
   );
 }
