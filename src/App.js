@@ -1,87 +1,42 @@
 import React from "react";
-import PropTypes from "prop-types";
 
-function Food({ name, picture, rating }) {
-  return (
-    <div>
-      <h2>I like {name}</h2>
-      <h4>{rating}/5</h4>
-      <img src={picture} alt={name}></img>
-    </div>
-  );
-}
+// class component
+// -don't have a return, but they have a render method.
+// render method is from React.component.
+// React is automatically going to execute the render method
+// of your class component
+class App extends React.Component {
+  // State is an obecjt, and in state, you are going to
+  // put the data of your component.
+  // The data that will change
+  state = {
+    count: 0,
+  };
 
-Food.propTypes = {
-  name: PropTypes.string.isRequired,
-  picture: PropTypes.string.isRequired,
-  rating: PropTypes.number,
-};
+  add = () => {
+    //console.log("add");
+    //this.state.count++;  // Do not mutate state directly. Use setState()  react/no-direct-mutation-state
+    // If we don't use setState, the render function is
+    // not going to be called with new state.
+    this.setState((current) => ({ count: current.count + 1 }));
+    //this.setState({ count: this.state.count + 1 });
+  };
+  minus = () => {
+    //console.log("minus");
+    //this.state.count--;
+    this.setState((current) => ({ count: current.count - 1 }));
+    //this.setState({ count: this.state.count - 1 });
+  };
 
-// All the element in React should be unique.
-// That's why we need an id on each elements.
-const foodILike = [
-  {
-    id: 1,
-    name: "Kimchi",
-    image:
-      "http://aeriskitchen.com/wp-content/uploads/2008/09/kimchi_bokkeumbap_02-.jpg",
-    rating: 4.95,
-  },
-  {
-    id: 2,
-    name: "Samgyeopsal",
-    image:
-      "https://3.bp.blogspot.com/-hKwIBxIVcQw/WfsewX3fhJI/AAAAAAAAALk/yHxnxFXcfx4ZKSfHS_RQNKjw3bAC03AnACLcBGAs/s400/DSC07624.jpg",
-    rating: 4.9,
-  },
-  {
-    id: 3,
-    name: "Bibimbap",
-    image:
-      "http://cdn-image.myrecipes.com/sites/default/files/styles/4_3_horizontal_-_1200x900/public/image/recipes/ck/12/03/bibimbop-ck-x.jpg?itok=RoXlp6Xb",
-    rating: 4.8,
-  },
-  {
-    id: 4,
-    name: "Doncasu",
-    image:
-      "https://s3-media3.fl.yelpcdn.com/bphoto/7F9eTTQ_yxaWIRytAu5feA/ls.jpg",
-    rating: 5.5,
-  },
-  {
-    id: 5,
-    name: "Kimbap",
-    image:
-      "http://cdn2.koreanbapsang.com/wp-content/uploads/2012/05/DSC_1238r-e1454170512295.jpg",
-    rating: 4.7,
-  },
-];
-
-function renderFood(dish) {
-  //console.log(dish);
-  return (
-    <Food
-      key={dish.id}
-      name={dish.name}
-      picture={dish.image}
-      rating={dish.rating}
-    />
-  );
-}
-
-// map is the javaScript function that takes an array
-// and excute a function in each item of the array
-// and it gives you an arrya with the result of that function
-
-function App() {
-  return (
-    <div>
-      {/* takes each item(dish) then return 
-      the name and the imamge
-      dish is the object that currently being processed */}
-      {foodILike.map(renderFood)}
-    </div>
-  );
+  render() {
+    return (
+      <div>
+        <h1>The number is: {this.state.count}</h1>
+        <button onClick={this.add}>Add</button>
+        <button onClick={this.minus}>Minus</button>
+      </div>
+    );
+  }
 }
 
 export default App;
